@@ -10,7 +10,11 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> datas;
     ArrayList<String> titles;
 
-    public FragmentAdapter(FragmentManager fm) {super(fm);}
+    public FragmentAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> tiles) {
+        super(fm);
+        this.datas = fragments;
+        this.titles = tiles;
+    }
     public void setData(ArrayList<Fragment> datas) {this.datas = datas;}
     public void setTitles(ArrayList<String> titles) {this.titles = titles;}
     @Override
@@ -25,5 +29,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return titles == null ? null : titles.get(position);
     }
+
 }
 
