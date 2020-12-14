@@ -1,4 +1,4 @@
-package com.jnu.yomtab;
+package com.jnu.yomtab.data;
 
 import java.io.Serializable;
 

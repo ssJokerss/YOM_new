@@ -2,7 +2,6 @@ package com.jnu.yomtab;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -13,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.jnu.yomtab.data.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         datas.add(new upFragment(personAdapter));//随礼myPageAdapter.setData(datas);
         myPageAdapter.setData(datas);
 
-
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 // 将适配器设置进ViewPager
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         final Button startButtonActivity = (Button)findViewById(R.id.button);
         startButtonActivity.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                Intent intent = new Intent(MainActivity.this,ButtonMainActivity.class);
                 startActivity(intent);
             }
         });
