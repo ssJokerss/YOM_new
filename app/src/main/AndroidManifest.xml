@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="人情笔记">
+            android:name=".welcomeActivity"
+            android:label="欢迎">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".welcomeActivity"
-            android:label="欢迎">
+            android:name=".MainActivity"
+            android:label="人情笔记">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -59,16 +59,16 @@ public class upFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_up, container, false);
         // Inflate the layout for this fragment
-        ListView ListViewBooks = view.findViewById(R.id.upp);
-        ListViewBooks.setAdapter(personAdapter);//部署适配器
-        this.registerForContextMenu(ListViewBooks);//为ListView添加场景菜单生成者和响应
+        ListView ListViewPeople = view.findViewById(R.id.upp);
+        ListViewPeople.setAdapter(personAdapter);//部署适配器
+        this.registerForContextMenu(ListViewPeople);//为ListView添加场景菜单生成者和响应
+
         return view;
     }
 }
