@@ -1,9 +1,11 @@
-package com.jnu.yomtab;
+package com.jnu.yomtab.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.jnu.yomtab.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

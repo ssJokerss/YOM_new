@@ -1,4 +1,4 @@
-package com.jnu.yomtab;
+package com.jnu.yomtab.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -6,11 +6,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+    public class PersonFragmentAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> datas;//存放显示的子视图
     ArrayList<String> titles;//存放要显示的标题
 
-    public FragmentAdapter(FragmentManager fm) {super(fm);}
+    public PersonFragmentAdapter(FragmentManager fm) {super(fm);}
     public void setData(ArrayList<Fragment> datas) {this.datas = datas;}
     public void setTitles(ArrayList<String> titles) {this.titles = titles;}
     @Override
@@ -29,4 +29,3 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         return titles == null ? null : titles.get(position);
     }
 }
-

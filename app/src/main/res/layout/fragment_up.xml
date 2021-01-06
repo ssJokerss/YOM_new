@@ -3,15 +3,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".upFragment">
+    tools:context=".fragment.upFragment"
+    android:orientation="vertical"
+    >
 
     <!-- TODO: Update blank fragment layout -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_up"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00CED1"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+
+        >
+        <Button
+            android:id="@+id/fragmentup_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_tongji"
+            android:padding="50dp"
+            >
+
+        </Button>
+        <Spinner
+            android:id="@+id/spinner_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:background="#FF1493"
+            android:id="@+id/textView"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="姓名"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="#FF7F50"
+            android:gravity="center"
+            android:text="金额"
+            android:textSize="18dp" />
+        <TextView
+            android:background="#00BFFF"
+            android:textSize="18dp"
+            android:id="@+id/textView3"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="日期"
+            android:gravity="center"/>
+        <TextView
+            android:background="#ADFF2F"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="缘由"
+            android:gravity="center"/>
+    </LinearLayout>
     <ListView
+        android:layout_marginTop="75dp"
         android:id="@+id/upp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="61dp"
-        />
+        >
+    </ListView>
+
 
 </FrameLayout>

@@ -3,19 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarFragment">
+    tools:context=".fragment.CalendarFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00CED1">
+        <!--自定义控件-->
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_upp"
+            android:background="#00000000"
+            >
+
+        </ImageButton>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="130dp"
+            android:text="主页"
+            android:textSize="30dp"
+            ></TextView>
+
+
+    </androidx.appcompat.widget.Toolbar>
     <!-- TODO: Update blank fragment layout -->
-    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp" >
+        android:padding="5dp">
 
         <CalendarView
             android:id="@+id/calendarViewIdnew"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="400dp"
+            android:layout_marginTop="50dp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <ExpandableListView
+        android:layout_marginTop="450dp"
+        android:id="@+id/uppp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="61dp"
+        >
+    </ExpandableListView>
 
 </FrameLayout>
