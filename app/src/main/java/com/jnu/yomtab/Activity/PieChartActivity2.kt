@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jnu.yomtab.R
 import com.jnu.yomtab.data.PieBean
-import com.jnu.yomtab.fragment.upFragment.Peoplenew
+import com.jnu.yomtab.fragment.downFragment.arrayList_person
 import com.jnu.yomtab.view.PieView
 import java.util.*
 
-class PieChartActivity : AppCompatActivity(), PieView.ClickListener {
+class PieChartActivity2 : AppCompatActivity(), PieView.ClickListener {
     override fun onArcClick(i: Int) {
 
     }
@@ -28,16 +28,15 @@ class PieChartActivity : AppCompatActivity(), PieView.ClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pie_chart)
         var k =0
-        for (i in Peoplenew.indices) {
+        for (i in arrayList_person.indices) {
             k++
         }
         val value = arrayOfNulls<Int>(k)
         val name = arrayOfNulls<String>(k)
 
-        for (i in Peoplenew.indices) {
-            value[i]= Peoplenew[i].money.toInt();
-            //name[i]= Peoplenew[i].date.substring(0, 7);
-            name[i]= Peoplenew[i].date;
+        for (i in arrayList_person.indices) {
+            value[i]= arrayList_person[i].money.toInt();
+            name[i]= arrayList_person[i].date;
         }
 
         Dates = ArrayList<PieBean>()
@@ -49,7 +48,7 @@ class PieChartActivity : AppCompatActivity(), PieView.ClickListener {
         //设置中间圆大小 0不显示中间圆 1到10中间圆逐渐减小
         pieView?.setCenterCir(2)
         //设置中间文字,在中间圆半径pieView.setCenterCir值1-5中间时才会显示
-        pieView?.setCenterText(resources.getString(R.string.percent))
+        pieView?.setCenterText(resources.getString(R.string.percent2))
         //设置中间文字颜色 默认黑色
         pieView?.setCenterTextColor(Color.RED)
         //是否显示百分比文字 默认true

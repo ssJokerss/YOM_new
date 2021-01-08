@@ -19,9 +19,7 @@ public class welcomeActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         startMainActivity();
     }
-
     private void startMainActivity(){
-
         TimerTask delayTask = new TimerTask() {
             @Override
             public void run() {
@@ -31,6 +29,6 @@ public class welcomeActivity extends Activity {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(delayTask,2500);//延时两秒执行 run 里面的操作
+        timer.schedule(delayTask,2500);//延时2.5秒执行 run 里面的操作
     }
 }

@@ -63,7 +63,7 @@ public class ButtonMainActivity extends AppCompatActivity {
 
         int s = getIntent().getIntExtra("money",0);
         System.out.println(s);
-        String s1 = s+"$";
+        String s1 = s+"";
         editMoney.setText(s1);
         editDate= (EditText) findViewById(R.id.date_edit);
         String time = getIntent().getStringExtra("date");

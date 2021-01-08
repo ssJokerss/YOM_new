@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,8 @@ import com.jnu.yomtab.data.Person;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 import static com.jnu.yomtab.Activity.MainActivity.People;
 
 public class upFragment extends Fragment {
@@ -129,11 +132,20 @@ public class upFragment extends Fragment {
                 break;
 
             case CONTEXT_MENU_ADDNEW:
+                Intent intent = new Intent(getActivity(),ButtonMainActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_NEW_BOOK);
                 break;
             case CONTEXT_MENU_UPDATE:{
+                int Position = ((AdapterView.AdapterContextMenuInfo)item.getMenuInfo()).position;
+                Intent intent2 = new Intent(getActivity(),ButtonMainActivity.class);
+                intent2.putExtra("title",Peoplenew.get(Position).getTitle());
+                intent2.putExtra("insert_position",Position);
+                startActivityForResult(intent2,REQUEST_CODE_UPDATE_BOOK);
+
             }
             break;
             case CONTEXT_MENU_ABOUT:
+                Toast.makeText(getActivity(),"更多敬请期待",Toast.LENGTH_LONG).show();
                 break;
         }
         return super.onContextItemSelected(item);
@@ -165,6 +177,33 @@ public class upFragment extends Fragment {
         });
     }
 
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case REQUEST_CODE_NEW_BOOK:
+                if (resultCode == RESULT_OK){
+                    String title = data.getStringExtra("title");
+                    int insertPosition=data.getIntExtra("insert_position",0);
+                    Peoplenew.add(insertPosition,new Person("博文","100","2019-01-01","婚礼"));
+                    personAdapter.notifyDataSetChanged();//通知数据已经改变
+                }
+                break;
+            case REQUEST_CODE_UPDATE_BOOK:
+                if (resultCode == RESULT_OK){
+                    int insertPosition=data.getIntExtra("insert_position",0);
+                    Person bookAtPostion = Peoplenew.get(insertPosition);
+                    bookAtPostion.setTitle(data.getStringExtra("title"));
+                    bookAtPostion.setMoney(data.getStringExtra("money"));
+                    bookAtPostion.setReason(data.getStringExtra("reason"));
+                    bookAtPostion.setDate(data.getStringExtra("date"));
+                    personAdapter.notifyDataSetChanged();//通知数据已经改变
+                    CalendarFragment.updateDate(data.getStringExtra("date"));//初始值);
+                    CalendarFragment.DownAdapter_calender.notifyDataSetChanged();
+                }
+                break;
+        }
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -180,21 +219,20 @@ public class upFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-
                 //拿到被选择项的值 核心算法
                 String str = (String) spinner_zhangben.getSelectedItem();
                 People.clear();
+                //Peoplenew收集所有条例
                 for(Person i:Peoplenew){
                     People.add(i);
                 }
                 for (Iterator<Person> it = People.iterator(); it.hasNext();) {
                     Person val = it.next();
+                    //如果和所选的账本名称不同或者没有选择“缘由”则删除
                     if ((!val.getReason().equals(str)&&(!str.equals("缘由")))) {
                         it.remove();
                     }
                 }
-
-
                 personAdapter.notifyDataSetChanged();
             }
 

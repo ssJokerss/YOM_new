@@ -34,8 +34,6 @@ public static String time;
     public CalendarFragment() {
 
     }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,14 +58,10 @@ public static String time;
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH)+1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-
         time =year + "-" +
                 (month<10 ? ("0" + month) : month) + "-" + day;
-
         updateDate(time);
-
         calendarView.setOnDateChangeListener(new myclick());
-
         ExpandableListView expandableListView2 = view.findViewById(R.id.uppp);
         DownAdapter_calender = new MainActivity.downAdapter(group_list, show_list);
         expandableListView2.setAdapter(DownAdapter_calender);
@@ -75,7 +69,7 @@ public static String time;
         return view;
 
     }
-
+// 筛选日期时间的判断，看字符串前7位是否相同
     public static void updateDate(String time){
         show_list.clear();
         ArrayList<Person> get_list = new ArrayList<>();
@@ -97,7 +91,6 @@ public static String time;
         //toolbar.setLogo(R.drawable.ic_down);//设置app logo
         //toolbar.setTitle();//设置主标题
         //toolbar.setSubtitle("主页");//设置子标题
-
         toolbar.inflateMenu(R.menu.base_toolbar_menu);//设置右上角的填充菜单
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -105,8 +98,6 @@ public static String time;
                 int menuItemId = item.getItemId();
                 if (menuItemId == R.id.action_search) {
                     Toast.makeText(getContext(), R.string.menu_search , Toast.LENGTH_SHORT).show();
-
-
                 } else if (menuItemId == R.id.action_item1) {
                     Toast.makeText(getContext() , R.string.item_01 , Toast.LENGTH_SHORT).show();
 

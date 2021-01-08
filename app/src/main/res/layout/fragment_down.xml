@@ -26,11 +26,12 @@
             >
         </Button>
         <TextView
-            android:id="@+id/textdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            />
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="130dp"
+            android:text="随礼"
+            android:textSize="30dp"
+            ></TextView>
     </androidx.appcompat.widget.Toolbar>
     <ExpandableListView
         android:layout_marginTop="50dp"

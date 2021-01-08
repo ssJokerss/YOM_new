@@ -49,10 +49,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int CONTEXT_MENU_ABOUT = CONTEXT_MENU_UPDATE+1;
     public static final int REQUEST_CODE_NEW_BOOK = 901;
     public static final int REQUEST_CODE_UPDATE_BOOK= 902;
-
     public static List<Person> People = new ArrayList<>();//创建ArrayListPeople收纳person数组
     public static PersonAdapter personAdapter;                    //personAdapter适配器
-    //public static downAdapter DownAdapter;                    //DownAdapter适配器
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ArrayList<Fragment> fragments;
@@ -65,9 +63,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();//创建tablayout和viewpager
         init2();
-
         initViewpager();//fragment和Viewpager相绑定
-        //toolbarinit();
         startButtonActivity = (Button)findViewById(R.id.button);
         registerForContextMenu(startButtonActivity);//将菜单绑定在view上
 
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             menu.setHeaderTitle("导航栏");
         }
     }
-    //公用的菜单选项
+    //菜单选项
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -98,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,901);
                 break;
             case R.id.home:
-                Intent intent2 = new Intent(this,MainActivity.class);
-                startActivity(intent2);
+
+                viewPager.setCurrentItem(1);
                 break;
             case R.id.suili:
                 Intent intent3 = new Intent(this,ButtonMainActivity.class);
@@ -133,16 +129,15 @@ public class MainActivity extends AppCompatActivity {
                     CalendarFragment.updateDate(date);
                     CalendarFragment.DownAdapter_calender.notifyDataSetChanged();
                 }
+                break;//一开始少了个break
             case (902):
                 if(resultCode == RESULT_OK){
-
                     String title = data.getStringExtra("title");//传入的title值
                     String money = data.getStringExtra("money");//初始值
                     String date = data.getStringExtra("date");//初始值
                     String reason = data.getStringExtra("reason");
                     arrayList_person.add(new Person(title,money,date,reason));
                     downFragment.initDate();
-                    //Peoplenew.add(new Person(title,money,date,reason));
                     DownAdapter.notifyDataSetChanged();//数据更新
                     CalendarFragment.updateDate(date);
                     CalendarFragment.DownAdapter_calender.notifyDataSetChanged();
@@ -150,14 +145,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+//初始化
     private void init(){
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         fragments = new ArrayList<Fragment>();
         titles = new ArrayList<String>();
     }
-
+//初始化2
+private void init2() {
+    personAdapter = new MainActivity.PersonAdapter(MainActivity.this, R.layout.person_item, People);
+    if(People.size()==0){//博文牛逼
+        People.add(new Person("张三","500","2015-10-1","婚礼"));
+        People.add(new Person("王五","500","2015-10-2","生日"));
+    }
+    arrayList_person.add(new Person("张三","100","2019-01-01","婚礼"));
+    arrayList_person.add(new Person("李四","100","2019-02-01","婚礼"));
+    arrayList_person.add(new Person("王五","100","2019-03-05","婚礼"));
+    arrayList_person.add(new Person("赵六","100","2019-04-01","婚礼"));
+    for(Person i:People){
+        Peoplenew.add(i);
+    }
+}
+//初始化viewpager
     private void initViewpager(){
         FragmentAdapter myPageAdapter = new FragmentAdapter(getSupportFragmentManager());
         fragments.add(new upFragment(personAdapter));
@@ -168,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         new_tab();
         viewPager.setCurrentItem(1);
     }
+    //添加图标操作
     private void new_tab(){
         tabLayout.addTab(tabLayout.newTab().setCustomView(tab_icon("收礼",R.drawable.ic_shouli)));
         tabLayout.addTab(tabLayout.newTab().setCustomView(tab_icon("主页",R.drawable.ic_zhuye)));
@@ -184,21 +195,7 @@ public class MainActivity extends AppCompatActivity {
         im.setImageResource(iconID);
         return newtab;
     }
-    private void init2() {
-        personAdapter = new MainActivity.PersonAdapter(MainActivity.this, R.layout.person_item, People);
-        if(People.size()==0){//博文牛逼
-            People.add(new Person("张三","500￥","2015-10-1","婚礼"));
-            People.add(new Person("王五","500￥","2015-10-2","生日"));
-        }
-        arrayList_person.add(new Person("博文","100","2019-01-01","婚礼"));
-        arrayList_person.add(new Person("博文","100","2019-02-01","婚礼"));
-        arrayList_person.add(new Person("久飞","100","2019-03-05","婚礼"));
-        arrayList_person.add(new Person("久飞","100","2019-04-01","婚礼"));
-        for(Person i:People){
-            Peoplenew.add(i);
-        }
 
-    }
     public static class PersonAdapter extends ArrayAdapter<Person> {
         private int resourceId;
         public PersonAdapter(Context context, int resource, List<Person> objects) {
@@ -217,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             return view;
         }
     }
-    //downFragment适配器
+    //downFragment适配器（Expendable ListView）
     public static class downAdapter extends BaseExpandableListAdapter{
         ArrayList<String> mGroupList;
         ArrayList<ArrayList<Person>> mChildList;
@@ -305,14 +302,13 @@ public class MainActivity extends AppCompatActivity {
     }
     static class GroupViewHolder {
         TextView tvTitle;
-    }
-
+    }//父布局
     static class ChildViewHolder {
         TextView tvTitle;
         TextView tvTitle2;
         TextView tvTitle3;
         TextView tvTitle4;
-    }
+    }//子布局
 
 }
 
