@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/suili"
+        android:checked="true"
+        android:title="随礼" />
+    <item
+        android:id="@+id/home"
+        android:checked="true"
+        android:title="主页" />
+    <item
+        android:id="@+id/shouli"
+        android:checked="true"
+        android:title="收礼" />
+    <item
+        android:id="@+id/cancel"
+        android:checked="true"
+        android:title="取消" />
+</menu>
