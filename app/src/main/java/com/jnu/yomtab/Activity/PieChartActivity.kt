@@ -20,7 +20,6 @@ class PieChartActivity : AppCompatActivity(), PieView.ClickListener {
     }
 
     private var pieView:PieView?=null
-
     private val color = intArrayOf(R.color.a, R.color.b, R.color.c, R.color.d, R.color.e, R.color.f)
     private var Dates: ArrayList<PieBean>? = null
     private var colors: ArrayList<Int>? = null
@@ -33,7 +32,6 @@ class PieChartActivity : AppCompatActivity(), PieView.ClickListener {
         }
         val value = arrayOfNulls<Int>(k)
         val name = arrayOfNulls<String>(k)
-
         for (i in Peoplenew.indices) {
             value[i]= Peoplenew[i].money.toInt();
             //name[i]= Peoplenew[i].date.substring(0, 7);

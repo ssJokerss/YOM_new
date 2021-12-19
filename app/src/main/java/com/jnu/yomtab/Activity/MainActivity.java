@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.jnu.yomtab.data.PersonSaver;
 import com.jnu.yomtab.fragment.CalendarFragment;
 import com.jnu.yomtab.R;
 import com.jnu.yomtab.adapter.FragmentAdapter;
@@ -49,20 +50,31 @@ public class MainActivity extends AppCompatActivity {
     public static final int CONTEXT_MENU_ABOUT = CONTEXT_MENU_UPDATE+1;
     public static final int REQUEST_CODE_NEW_BOOK = 901;
     public static final int REQUEST_CODE_UPDATE_BOOK= 902;
-    public static List<Person> People = new ArrayList<>();//创建ArrayListPeople收纳person数组
+    public static ArrayList<Person> People = new ArrayList<>();//创建ArrayListPeople收纳person数组
     public static PersonAdapter personAdapter;                    //personAdapter适配器
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ArrayList<Fragment> fragments;
     private ArrayList<String> titles;
     private Button startButtonActivity;             //记一笔button
+    PersonSaver personSaver;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        personSaver.save();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //personSaver = new PersonSaver(this);
+        //People = personSaver.load();
         init();//创建tablayout和viewpager
+        if(People.size() ==0)
         init2();
+        init3();
         initViewpager();//fragment和Viewpager相绑定
         startButtonActivity = (Button)findViewById(R.id.button);
         registerForContextMenu(startButtonActivity);//将菜单绑定在view上
@@ -159,14 +171,17 @@ private void init2() {
         People.add(new Person("张三","500","2015-10-1","婚礼"));
         People.add(new Person("王五","500","2015-10-2","生日"));
     }
-    arrayList_person.add(new Person("张三","100","2019-01-01","婚礼"));
-    arrayList_person.add(new Person("李四","100","2019-02-01","婚礼"));
-    arrayList_person.add(new Person("王五","100","2019-03-05","婚礼"));
-    arrayList_person.add(new Person("赵六","100","2019-04-01","婚礼"));
     for(Person i:People){
         Peoplenew.add(i);
     }
 }
+//初始化3
+    private void init3() {
+        arrayList_person.add(new Person("张三","100","2019-01-01","婚礼"));
+        arrayList_person.add(new Person("李四","100","2019-02-01","婚礼"));
+        arrayList_person.add(new Person("王五","100","2019-03-05","婚礼"));
+        arrayList_person.add(new Person("赵六","100","2019-04-01","婚礼"));
+    }
 //初始化viewpager
     private void initViewpager(){
         FragmentAdapter myPageAdapter = new FragmentAdapter(getSupportFragmentManager());
@@ -271,7 +286,6 @@ private void init2() {
             groupViewHolder.tvTitle.setText(mGroupList.get(groupPosition));
             return convertView;
         }
-
         @Override
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             ChildViewHolder childViewHolder;
@@ -283,7 +297,6 @@ private void init2() {
                 childViewHolder.tvTitle3 = (TextView)convertView.findViewById(R.id.person_item_kongjian3);
                 childViewHolder.tvTitle4 = (TextView)convertView.findViewById(R.id.person_item_kongjian4);
                 convertView.setTag(childViewHolder);
-
             }else {
                 childViewHolder = (ChildViewHolder) convertView.getTag();
             }
@@ -291,7 +304,6 @@ private void init2() {
             childViewHolder.tvTitle2.setText(mChildList.get(groupPosition).get(childPosition).getMoney());
             childViewHolder.tvTitle3.setText(mChildList.get(groupPosition).get(childPosition).getDate());
             childViewHolder.tvTitle4.setText(mChildList.get(groupPosition).get(childPosition).getReason());
-
             return convertView;
         }
 
@@ -309,6 +321,5 @@ private void init2() {
         TextView tvTitle3;
         TextView tvTitle4;
     }//子布局
-
 }
 

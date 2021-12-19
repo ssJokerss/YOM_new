@@ -64,6 +64,7 @@ public static String time;
         calendarView.setOnDateChangeListener(new myclick());
         ExpandableListView expandableListView2 = view.findViewById(R.id.uppp);
         DownAdapter_calender = new MainActivity.downAdapter(group_list, show_list);
+
         expandableListView2.setAdapter(DownAdapter_calender);
         this.registerForContextMenu(expandableListView2);
         return view;
